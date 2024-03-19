@@ -1,29 +1,18 @@
 import "./App.css";
 import Todos from "./Todos";
-import { useState, useEffect } from "react";
-
-// function Butn({ value, onMyClick}) {
-//   return (
-//     <button onClick={onMyClick}
-//     style={{'background-color': 'red'}}>
-//           value = {value}
-//     </button>
-//   )
-// }
+import { useState } from "react";
 
 export default function App() {
   const [state, changeState] = useState([{id: 1, todo: "Main Todo", done: true}]);
   const [btnState, changeBtnState] = useState("");
 
-  function handleClick(e) {
+  function handleClick() {
     changeState([... state, { id: state[state.length-1].id+1, todo: btnState, done: true }]);
   }
   
   function handleInputChange(e) {
     changeBtnState(e.target.value)
   }
-
-
 
   return (
     <>
