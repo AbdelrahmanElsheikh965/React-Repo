@@ -12,30 +12,52 @@ import { useState } from "react";
 // }
 
 export default function App() {
-  const [state, changeState] = useState([]);
-  function handleClick (e) {
-    // e.preventDefault();
-    console.log(e.target);
-  };
+  const [state, changeState] = useState([{id: 1, todo: "Main Todo"}]);
+  const [btnState, changeBtnState] = useState("");
+
+  function handleClick(e) {
+    changeState([... state, { id: state[state.length-1].id+1, todo: btnState }]);
+  }
+  
+  function handleInputChange(e) {
+    changeBtnState(e.target.value)
+  }
   return (
     <>
       <nav className="navbar navbar-light bg-light">
-        <form className="form-inline">
+        {/* <form className="form-inline"> */}
           <input
             className="form-control"
             placeholder="Type your todo"
+            onChange={handleInputChange}
             name="todo"
           />
           <br />
-        Let's get some work done!
-
+          Let's get some work done!
           <br /> <br />
           <button className="btn btn-outline-success" onClick={handleClick}>
             Add
           </button>
-        </form>
+        {/* </form> */}
       </nav>
-      <Todos todosData={state}/>
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Todo-Name</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {state.map((one) => (
+            <tr key={one.id}>
+              <td scope="row">{one.id}</td>
+              <td>{one.todo}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </>
   );
 }
