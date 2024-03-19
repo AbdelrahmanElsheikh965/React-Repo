@@ -39,7 +39,7 @@ export default function App() {
           </button>
       </nav>
 
-      <Todos todos={state} />
+      <Todos todos={state} chg={changeState} />
     </>
   );
 }
