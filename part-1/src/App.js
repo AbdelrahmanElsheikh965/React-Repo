@@ -1,6 +1,6 @@
 import "./App.css";
 import Todos from "./Todos";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 // function Butn({ value, onMyClick}) {
 //   return (
@@ -12,16 +12,19 @@ import { useState } from "react";
 // }
 
 export default function App() {
-  const [state, changeState] = useState([{id: 1, todo: "Main Todo"}]);
+  const [state, changeState] = useState([{id: 1, todo: "Main Todo", done: true}]);
   const [btnState, changeBtnState] = useState("");
 
   function handleClick(e) {
-    changeState([... state, { id: state[state.length-1].id+1, todo: btnState }]);
+    changeState([... state, { id: state[state.length-1].id+1, todo: btnState, done: true }]);
   }
   
   function handleInputChange(e) {
     changeBtnState(e.target.value)
   }
+
+
+
   return (
     <>
       <nav className="navbar navbar-light bg-light">
@@ -38,7 +41,6 @@ export default function App() {
             Add
           </button>
       </nav>
-
       <Todos todos={state} chg={changeState} />
     </>
   );
