@@ -25,7 +25,6 @@ export default function App() {
   return (
     <>
       <nav className="navbar navbar-light bg-light">
-        {/* <form className="form-inline"> */}
           <input
             className="form-control"
             placeholder="Type your todo"
@@ -38,26 +37,9 @@ export default function App() {
           <button className="btn btn-outline-success" onClick={handleClick}>
             Add
           </button>
-        {/* </form> */}
       </nav>
 
-      <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Todo-Name</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          {state.map((one) => (
-            <tr key={one.id}>
-              <td scope="row">{one.id}</td>
-              <td>{one.todo}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <Todos todos={state} />
     </>
   );
 }
