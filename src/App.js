@@ -9,11 +9,14 @@ import { Route, Routes, useHistory } from "react-router-dom";
 import NotFound from "./components/notfound";
 import Register from "./components/Register";
 import Product from "./components/oneproduct";
+import router from "./router";
+import { RouterProvider } from "react-router-dom";
 
 function App() {
   return (
     // <Register />
-    <Product />
+    // <Product />
+    <RouterProvider router={router} ></RouterProvider>
     // <Routes>
     //   <Route exact path="/products" element={<Products />} />
     //   <Route exact path="/products/:id" element={<Product />} />

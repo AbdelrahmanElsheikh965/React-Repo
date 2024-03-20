@@ -19,14 +19,6 @@ export default function Product() {
                 <img src={'https://cdn.dummyjson.com/product-images/1/thumbnail.jpg'} alt="" />
               </div>
 
-              <div class="swiper-slide">
-                <img src="assets/img/portfolio-details-2.jpg" alt="" />
-              </div>
-
-              <div class="swiper-slide">
-                <img src="assets/img/portfolio-details-3.jpg" alt="" />
-              </div>
-
             </div>
             <div class="swiper-pagination"></div>
           </div>
