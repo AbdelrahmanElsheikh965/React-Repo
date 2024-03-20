@@ -16,16 +16,10 @@ export default function Products() {
   return (
     <section id="work" className="portfolio-mf sect-pt4 route" style={{'width': '950px'}}>
       <div className="container">
-
         <div className="row">
         {products.products?.map((product)=>(
-
           <Card product={product}></Card>
-         
-
         ))}
-
-          
         </div>
       </div>
     </section>

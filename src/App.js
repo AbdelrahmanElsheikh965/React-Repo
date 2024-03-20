@@ -5,12 +5,21 @@ import { useState, useEffect } from "react";
 import Products from "./components/Products";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Container, Card, Col, Button } from "react-bootstrap";
+import { Route, Routes, useHistory } from "react-router-dom";
+import NotFound from "./components/notfound";
+import Register from "./components/Register";
+import Product from "./components/oneproduct";
 
 function App() {
-
   return (
-    
-    <Products />  
+    // <Register />
+    <Product />
+    // <Routes>
+    //   <Route exact path="/products" element={<Products />} />
+    //   <Route exact path="/products/:id" element={<Product />} />
+    //   <Route exact path="/register" element={<Register />} />
+    //   <Route path="*" element={<NotFound />} />
+    // </Routes>
   );
 }
 
