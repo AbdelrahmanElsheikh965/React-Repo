@@ -18,6 +18,7 @@ export default function Register() {
           ...data,
           name: e.target.value
         });
+        validateTheForm();
         break;
 
         case "email":
@@ -25,6 +26,7 @@ export default function Register() {
           ...data,
           email: e.target.value
         });
+        validateTheForm();
         break;
 
         case "password":
@@ -32,6 +34,7 @@ export default function Register() {
           ...data,
           password: e.target.value
         });
+        validateTheForm();
         break;
     
       default:
@@ -40,6 +43,7 @@ export default function Register() {
   }
 
   const emailRegexPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
+  const noSpaceRegex = /^\S*$/;
 
   const [errors, setErrors] = useState({
     name_error: "",
@@ -47,21 +51,35 @@ export default function Register() {
     password_error: ""
   });
 
-
   function validateTheForm() {
     setErrors({
-      name_error: !data.name ? "name is required" : "",
+      name_error: !data.name ? "name is required" : !noSpaceRegex.test(data.name) ? 'remove spaces' : '',
       email_error: !data.email ? "email is required" : !emailRegexPattern.test(data.email) ? 'not email format ' : "",
-      password_error: !data.password ? "password is required" : "",
+      password_error: !data.password ? "password is required" : data.password.length < 8 || data.password.length > 12 ? 'min is 8 and max is 12' : '',
 
     })
     // if (data.name && data.email && data.password) {
     //   alert('done');
     // } 
   }
+  
+  const [isSubmittedOrNot, setSubmiited] = useState(false);
+  useEffect(() => {
+    if (
+      !errors.name_error &&
+      !errors.email_error &&
+      !errors.password_error &&
+      isSubmittedOrNot
+    ) {
+      alert('your form is errors-free')
+      console.log(data);
+    }
+  }, [errors]);
+
 
   function handleSubmit(e) {
     e.preventDefault();
+    setSubmiited(true);
     validateTheForm();
     // request backend api
   }
