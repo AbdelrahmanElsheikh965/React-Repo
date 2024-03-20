@@ -24,14 +24,6 @@ export default function NavBar() {
               </Link>
             </a>
           </li>
-
-          <li className="nav-item">
-            <a className="nav-link" href="#">
-              <Link to='/product' > 
-                product
-              </Link>
-            </a>
-          </li>
         </ul>
       </div>
     </nav>

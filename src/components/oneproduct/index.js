@@ -5,9 +5,9 @@ import Card from "../card";
 import { useParams } from "react-router-dom";
 
 export default function Product() {
-
-  const id  = useParams().id;
-const [product, setProduct] = useState([]);
+  
+  const id = useParams().id;
+  const [product, setProduct] = useState([]);
 
   useEffect(() => {
     fetch(`https://dummyjson.com/products/${id}`)
@@ -18,42 +18,38 @@ const [product, setProduct] = useState([]);
 
   return (
     <section id="portfolio-details" class="portfolio-details">
-    <div class="container">
-
-      <div class="row gy-4">
-
-        <div class="col-lg-8">
-          <div class="portfolio-details-slider swiper">
-            <div class="swiper-wrapper align-items-center">
-
-              <div class="swiper-slide">
-                <img src={product.thumbnail} alt="" />
+      <div class="container">
+        <div class="row gy-4">
+          <div class="col-lg-8">
+            <div class="portfolio-details-slider swiper">
+              <div class="swiper-wrapper align-items-center">
+                <div class="swiper-slide">
+                  <img src={product.thumbnail} alt="" />
+                </div>
               </div>
-
+              <div class="swiper-pagination"></div>
             </div>
-            <div class="swiper-pagination"></div>
+          </div>
+
+          <div class="col-lg-4">
+            <div class="portfolio-info">
+              <h3>Project information</h3>
+              <ul>
+                <li>
+                  <strong>Title</strong> {product.title}{" "}
+                </li>
+                <li>
+                  <strong>Category</strong> {product.category}{" "}
+                </li>
+              </ul>
+            </div>
+            <div class="portfolio-description">
+              <h2>This is description of the product</h2>
+              <p>{product.description}</p>
+            </div>
           </div>
         </div>
-
-        <div class="col-lg-4">
-          <div class="portfolio-info">
-            <h3>Project information</h3>
-            <ul>
-              <li><strong>Title</strong> {product.title} </li>
-              <li><strong>Category</strong> {product.category} </li>
-            </ul>
-          </div>
-          <div class="portfolio-description">
-            <h2>This is an example of portfolio detail</h2>
-            <p>
-              Autem ipsum nam porro corporis rerum. Quis eos dolorem eos itaque inventore commodi lt est omnis tempora consectetur dignissimos. Sequi nulla at esse enim cum deserunt eius.
-            </p>
-          </div>
-        </div>
-
       </div>
-
-    </div>
-  </section>
+    </section>
   );
 }

@@ -40,6 +40,7 @@ const router = createBrowserRouter([
   },
   {
     element: <WithoutLayout />,
+    errorElement: <NotFound />,
     children: [
       {
         element: <Register />,
