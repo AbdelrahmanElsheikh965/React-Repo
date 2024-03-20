@@ -11,6 +11,14 @@ export default function Register() {
     password: ""
   });
 
+  const [pass, setPass] = useState({
+    pass: ""
+  });
+
+  const [imageState, setImage] = useState({
+    imageState: null
+  });
+
   const processChange = (e) => {
     switch (e.target.name) {
       case "name":
@@ -36,6 +44,20 @@ export default function Register() {
         });
         validateTheForm();
         break;
+
+        case "cnfrmPasswd":
+          setPass({
+            pass: e.target.value
+          });
+        validateTheForm();
+        break;
+
+        case "image":
+          setImage({
+            imageState: e.target.files[0]
+          });
+        validateTheForm();
+        break;
     
       default:
         break;
@@ -44,11 +66,14 @@ export default function Register() {
 
   const emailRegexPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
   const noSpaceRegex = /^\S*$/;
+  const allowedImageExtensions = ['image/jpg', 'image/png', 'image/jpeg'];
 
   const [errors, setErrors] = useState({
     name_error: "",
     email_error: "",
-    password_error: ""
+    password_error: "",
+    password_confirm_error: "",
+    image_error: ""
   });
 
   function validateTheForm() {
@@ -56,11 +81,9 @@ export default function Register() {
       name_error: !data.name ? "name is required" : !noSpaceRegex.test(data.name) ? 'remove spaces' : '',
       email_error: !data.email ? "email is required" : !emailRegexPattern.test(data.email) ? 'not email format ' : "",
       password_error: !data.password ? "password is required" : data.password.length < 8 || data.password.length > 12 ? 'min is 8 and max is 12' : '',
-
+      password_confirm_error: !pass.pass ? "confirming password is required" : !(pass.pass === data.password) ? 'passwords don\'t match' : '',
+      image_error : !imageState.imageState ? "Image is required" : !allowedImageExtensions.includes(imageState.imageState.type) ? 'unwanted format' : ''
     })
-    // if (data.name && data.email && data.password) {
-    //   alert('done');
-    // } 
   }
   
   const [isSubmittedOrNot, setSubmiited] = useState(false);
@@ -69,6 +92,8 @@ export default function Register() {
       !errors.name_error &&
       !errors.email_error &&
       !errors.password_error &&
+      !errors.password_confirm_error &&
+      !errors.image_error &&
       isSubmittedOrNot
     ) {
       alert('your form is errors-free')
@@ -123,13 +148,15 @@ export default function Register() {
                         <div className="col-md-12 mb-3">
                           <div className="form-group">
                             <input type="text" className="form-control" name="cnfrmPasswd" placeholder="Confirm Password" onChange={processChange}  />
+                            {errors.password_confirm_error && <p> {errors.password_confirm_error} </p> }
                           </div>
                         </div>
 
                         <div className="col-md-12 mb-3">
                           <div className="form-group">
                             <label >upload image</label>
-                            <input type="file" className="form-control" name="image" />
+                            <input type="file" className="form-control" name="image" onChange={processChange} />
+                            {errors.image_error && <p> {errors.image_error} </p> }
                           </div>
                         </div>
 
