@@ -2,8 +2,19 @@ import React from "react";
 import "./index.css";
 import { useState, useEffect } from "react";
 import Card from "../card";
+import { useParams } from "react-router-dom";
 
 export default function Product() {
+
+  const id  = useParams().id;
+const [product, setProduct] = useState([]);
+
+  useEffect(() => {
+    fetch(`https://dummyjson.com/products/${id}`)
+      .then((data) => data.json())
+      .then((data) => setProduct(data))
+      .catch((err) => console.log(err.message));
+  }, []);
 
   return (
     <section id="portfolio-details" class="portfolio-details">
@@ -16,7 +27,7 @@ export default function Product() {
             <div class="swiper-wrapper align-items-center">
 
               <div class="swiper-slide">
-                <img src={'https://cdn.dummyjson.com/product-images/1/thumbnail.jpg'} alt="" />
+                <img src={product.thumbnail} alt="" />
               </div>
 
             </div>
@@ -28,8 +39,8 @@ export default function Product() {
           <div class="portfolio-info">
             <h3>Project information</h3>
             <ul>
-              <li><strong>Title</strong>: Web design</li>
-              <li><strong>Category</strong>: ASU Company</li>
+              <li><strong>Title</strong> {product.title} </li>
+              <li><strong>Category</strong> {product.category} </li>
             </ul>
           </div>
           <div class="portfolio-description">

@@ -3,6 +3,7 @@ import Product from "./components/oneproduct";
 import Products from "./components/Products";
 import NavBar from "./components/nav";
 import Register from "./components/Register";
+import NotFound from "./components/notfound";
 
 function Layout() {
   return (
@@ -25,15 +26,16 @@ function WithoutLayout() {
 const router = createBrowserRouter([
   {
     element: <Layout />,
+    errorElement: <NotFound />,
     children: [
       {
-        element: <Product />,
-        path: "/product"
+        element: <Products />,
+        path: "/",
       },
       {
-        element: <Products />,
-        path: "/"
-      }
+        element: <Product />,
+        path: "/products/:id"
+      },
     ]
   },
   {
